@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>firstDapp</title>
-    
+
 </head>
 <style>
     body {
         text-align: center;
         font-family: Arial, Helvetica, sans-serif;
     }
+
     div {
         width: 20%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
     }
+
     button {
         width: 100%;
         margin: 10px 0 5px 0;
     }
 </style>
+
 <body>
     <div>
         <h1>This is my firstDapp</h1>
@@ -38,7 +42,7 @@
     <script>
 
         const provider = new ethers.providers.Web3Provider(window.ethereum, 'goerli');
-        const MoodContractAddress = "0xb6df30aa167468d17f6c6005a25e9fb8dd71b7d3";
+        const MoodContractAddress = "0xff087446eea6c863483075433ca437ec64ec7ac1";
         const MoodContractABI = [
 	{
 		"inputs": [
@@ -66,12 +70,13 @@
 		"stateMutability": "view",
 		"type": "function"
 	}
-];
+]
         let MoodContract;
         let signer;
 
         provider.send('eth_requestAccounts', []).then(() => {
             provider.listAccounts().then((accounts) => {
+                signer = provider.getSigner(accounts[0]);
                 MoodContract = new ethers.Contract(
                     MoodContractAddress,
                     MoodContractABI,
@@ -92,4 +97,5 @@
         }
     </script>
 </body>
+
 </html>
